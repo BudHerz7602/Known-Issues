@@ -1,0 +1,102 @@
+{
+  "_comment": "Known Issues Catalog — managed by Accounting Seed T3/KB team.",
+  "_instructions": [
+    "This file is fetched by the issueDetector LWC in every subscriber org via the KnownIssueCatalog Named Credential.",
+    "Updates to this file are live in all orgs within 4 hours (the client-side cache TTL).",
+    "",
+    "Field reference:",
+    "  developerName   — unique key, no spaces, used in Case description prefix",
+    "  label           — short human-readable name shown in the suggestion card",
+    "  errorPattern    — JavaScript-compatible regex (case-insensitive); test at regex101.com before publishing",
+    "  matchContext    — optional regex matched against window.location.pathname; leave blank to match any page",
+    "  signalSource    — one of: Toast | Console | Apex | Any",
+    "  summary         — one sentence shown to the user; include the resolution hint if short enough",
+    "  kbArticleUrl    — full URL to the KB article; leave blank if not yet published",
+    "  kbArticleId     — Salesforce Knowledge article ID; optional",
+    "  severity        — High | Medium | Low",
+    "  walkthroughName — KBShowMe__mdt DeveloperName for Shepherd.js tour (PROD-492); leave blank if no tour",
+    "  active          — set to false to disable a pattern without deleting it"
+  ],
+  "version": "1.0",
+  "publishedAt": "2026-05-20T00:00:00Z",
+  "issues": [
+    {
+      "developerName": "Billing_Post_Closed_Ledger",
+      "label": "Billing Post: Closed Accounting Period",
+      "errorPattern": "accounting period.*closed|closed.*accounting period|period.*not open|cannot post.*closed",
+      "matchContext": "",
+      "signalSource": "Toast",
+      "summary": "This error occurs when posting a Billing whose Accounting Period is closed. Reopen the period or change the Billing date to an open period.",
+      "kbArticleUrl": "",
+      "kbArticleId": "",
+      "severity": "High",
+      "walkthroughName": "",
+      "active": true
+    },
+    {
+      "developerName": "Cash_Receipt_Apply_Overapplied",
+      "label": "Cash Receipt: Overapplied Amount",
+      "errorPattern": "overapplied|applied amount.*exceed|exceed.*applied amount|amount applied.*greater",
+      "matchContext": "",
+      "signalSource": "Toast",
+      "summary": "The amount being applied exceeds the Cash Receipt balance. Reduce the applied amount or unapply an existing allocation before reapplying.",
+      "kbArticleUrl": "",
+      "kbArticleId": "",
+      "severity": "Medium",
+      "walkthroughName": "",
+      "active": true
+    },
+    {
+      "developerName": "GL_Account_Inactive_On_Post",
+      "label": "Posting Blocked: Inactive GL Account",
+      "errorPattern": "gl account.*inactive|inactive.*gl account|inactive.*general ledger|general ledger.*inactive",
+      "matchContext": "",
+      "signalSource": "Toast",
+      "summary": "A GL Account on this transaction is marked Inactive. Reactivate the GL Account in the Chart of Accounts or update the transaction to use an active account.",
+      "kbArticleUrl": "",
+      "kbArticleId": "",
+      "severity": "High",
+      "walkthroughName": "",
+      "active": true
+    },
+    {
+      "developerName": "Period_Close_Unposted_Records",
+      "label": "Period Close: Unposted Records Exist",
+      "errorPattern": "unposted.*cannot close|cannot close.*unposted|period close.*unposted|unposted transaction",
+      "matchContext": "",
+      "signalSource": "Toast",
+      "summary": "The Accounting Period cannot be closed while unposted transactions exist. Post or delete all pending records before closing the period.",
+      "kbArticleUrl": "",
+      "kbArticleId": "",
+      "severity": "High",
+      "walkthroughName": "",
+      "active": true
+    },
+    {
+      "developerName": "Recurring_Billing_Wrong_Next_Date",
+      "label": "Recurring Billing: Incorrect Next Bill Date",
+      "errorPattern": "next bill date|recurring.*date.*incorrect|recurring billing.*wrong date",
+      "matchContext": "",
+      "signalSource": "Console",
+      "summary": "The Next Bill Date on a Recurring Billing record is showing incorrectly after a new invoice was created. Refresh the record and verify the date before the next cycle runs.",
+      "kbArticleUrl": "",
+      "kbArticleId": "",
+      "severity": "Medium",
+      "walkthroughName": "",
+      "active": true
+    },
+    {
+      "developerName": "Generic_Console_Test",
+      "label": "Issue Reporter Smoke Test",
+      "errorPattern": "\\[IR_TEST\\]",
+      "matchContext": "",
+      "signalSource": "Console",
+      "summary": "Test pattern for validating the Issue Reporter + Detector in scratch orgs. Run console.error('[IR_TEST] ...') in the browser console to trigger it.",
+      "kbArticleUrl": "",
+      "kbArticleId": "",
+      "severity": "Medium",
+      "walkthroughName": "",
+      "active": true
+    }
+  ]
+}
